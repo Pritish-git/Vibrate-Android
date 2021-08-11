@@ -33,16 +33,22 @@ public class MainActivity extends AppCompatActivity {
 
 
                 if (!vibrator.hasVibrator()) {
-                    return;
+                    return; //Check if device has vibrator hardware or not, if not then return from this method
+                            //don't execute futher code below
                 }
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
+                    
+                    //if API = 26(Oreo) or higher
                     vibrator.vibrate(
                             VibrationEffect.createOneShot(1000,VibrationEffect.DEFAULT_AMPLITUDE)
                     );
 
                 } else {
+                    //vibrate for 1 second
+                     vibrator.vibrate(1000);
+                    
+                    //Vibration Pattern - you can create yours
                     long[] pattern = {0, 200, 10, 500};
                     vibrator.vibrate(pattern, -1);
                 }
@@ -54,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
         Stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                
+                //To stop the vibartion
                 vibrator.cancel();
             }
         });
